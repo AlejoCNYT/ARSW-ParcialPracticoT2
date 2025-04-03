@@ -47,7 +47,7 @@ public class OrdersAPIController
             for (Integer orderId : ros.getTablesWithOrders())
             {
 
-
+                ros.addNewOrderToTable(ros.getTableOrder(orderId));
                 JSONPObject json = new JSONPObject("totalOrder", ros.getTableOrder(orderId));
                 result.add(json);
 
