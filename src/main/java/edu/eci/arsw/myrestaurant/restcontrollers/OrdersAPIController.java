@@ -18,6 +18,7 @@ package edu.eci.arsw.myrestaurant.restcontrollers;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController(value = "/orders")
 public class OrdersAPIController
 {
+    // @Autowired
     public ResponseEntity<?> OrdersAPIController()
     {
 
@@ -45,14 +47,12 @@ public class OrdersAPIController
             for (Integer orderId : ros.getTablesWithOrders())
             {
 
-                if (!ros.getTablesWithOrders().isEmpty())
-                {
-                    JSONPObject json = new JSONPObject("totalOrder", ros.getTableOrder(orderId));
-                    result.add(json);
-                }
+
+                JSONPObject json = new JSONPObject("totalOrder", ros.getTableOrder(orderId));
+                result.add(json);
 
             }
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result.toString(), HttpStatus.OK);
         }
         catch (Exception e)
         {
